@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById("themeToggle");
 
-    // Apply saved theme on load
+    // Apply saved theme on page load
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Toggle button
     if (button) {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function(e) {
+            e.preventDefault(); // stop default action
             document.body.classList.toggle("dark-mode");
 
             // Save preference
@@ -21,4 +22,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
