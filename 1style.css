@@ -896,8 +896,15 @@ body {
     }
 }
 
+.dark-mode {
+    background-color: black !important;
+    color: white !important;
+}
 
 
+.dark-mode a {
+    color: lightblue !important;
+}
 
 
 
