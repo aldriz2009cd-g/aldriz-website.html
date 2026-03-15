@@ -1,25 +1,59 @@
-const toggleButton = document.getElementById("themeToggle");
+window.addEventListener("load", function() { 
+  const loader = document.getElementById("loader"); 
+  if(loader){ 
+    loader.style.display = "none"; 
+  } 
+
+  
+  const themeToggle = document.createElement("button"); 
+  themeToggle.id = "themeToggle"; 
+  themeToggle.textContent = "Dark Mode"; 
+  document.body.appendChild(themeToggle); 
+
+  themeToggle.addEventListener("click", () => { 
+    document.body.classList.toggle("dark-mode"); 
+    themeToggle.textContent = document.body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode"; 
+  });
+});
+
+const backToTop = document.getElementById("backToTop"); 
+
+window.addEventListener("scroll", () => { 
+  if(window.scrollY > 300){ 
+    backToTop.style.display = "block"; 
+      
+  } else { 
+    backToTop.style.display = "none"; 
+  } 
+});
+
+backToTop.addEventListener("click", () => { 
+  window.scrollTo({top:0, behavior:"smooth"}); 
+});
 
 
-if (toggleButton) {
-    toggleButton.addEventListener("click", function (e) {
-        e.preventDefault(); 
 
-        document.body.classList.toggle("dark-mode");
-
-        
-        if (document.body.classList.contains("dark-mode")) {
-            localStorage.setItem("theme", "dark");
-        } else {
-            localStorage.setItem("theme", "light");
-        }
-    });
-}
+const sections = document.querySelectorAll("section"); 
+const navLinks = document.querySelectorAll("nav ul li a"); 
 
 
-window.addEventListener("load", function () {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark-mode");
-    }
+
+window.addEventListener("scroll", () => { 
+  let current = ""; 
+  sections.forEach(section => { 
+      
+    const sectionTop = section.offsetTop - 60; 
+    if(scrollY >= sectionTop){ 
+      current = section.getAttribute("id"); 
+    } 
+  }); 
+
+
+    
+  navLinks.forEach(link => { 
+    link.classList.remove("active"); 
+    if(link.getAttribute("href") === "#" + current){ 
+      link.classList.add("active"); 
+    } 
+  }); 
 });
